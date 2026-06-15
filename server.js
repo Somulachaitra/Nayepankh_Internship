@@ -11,6 +11,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -18,6 +19,22 @@ const PORT = process.env.PORT || 3000;
 // ---------- Middleware ----------
 app.use(cors());
 app.use(express.json());
+
+// ---------- Serve HTML pages from /pages directory without prefix or .html extension ----------
+const pagesDir = path.join(__dirname, 'pages');
+fs.readdirSync(pagesDir).forEach(file => {
+  if (file.endsWith('.html')) {
+    const routeName = path.parse(file).name; // filename without extension
+    app.get(`/${routeName}`, (req, res) => {
+      res.sendFile(path.join(pagesDir, file));
+    });
+
+    // Also handle routes with trailing slash
+    app.get(`/${routeName}/`, (req, res) => {
+      res.sendFile(path.join(pagesDir, file));
+    });
+  }
+});
 
 // ---------- Serve static files ----------
 // Serve the entire project directory as static files
@@ -136,12 +153,12 @@ app.get('/api/health', (req, res) => {
 // ---------- Start ----------
 app.listen(PORT, () => {
   console.log(`
-  ╔══════════════════════════════════════════════╗
+  ╔═════════════════════════════════════════════════╗
   ║   🌟 NayePankh AI Server                    ║
   ║   Running at http://127.0.0.1:${PORT}           ║
   ║                                              ║
   ║   Gemini AI:  ${GEMINI_API_KEY ? '✅ Configured' : '❌ Not configured'}              ║
   ║   Static:     ✅ Serving from ./             ║
-  ╚══════════════════════════════════════════════╝
+  ╚═════════════════════════════════════════════════╝
   `);
 });
