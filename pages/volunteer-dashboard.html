@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Volunteer Dashboard | NayePankh Foundation</title>
+  <meta name="description" content="Your volunteer dashboard — view profile, application status, events, and impact contributions." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/admin.css" />
+  <link rel="icon" type="image/png" href="../images/logo.svg.png" />
+</head>
+<body>
+
+  <header class="header">
+    <div class="container">
+      <nav class="nav">
+        <a href="../index.html" class="nav-logo">
+          <img src="../images/logo.svg.png" alt="Logo" />
+          <span>NayePankh</span>
+        </a>
+        <ul class="nav-menu">
+          <li><a href="../index.html" class="nav-link">Home</a></li>
+          <li><a href="volunteer-dashboard.html" class="nav-link active">Dashboard</a></li>
+          <li><a href="volunteer-login.html" class="nav-link">Login</a></li>
+          <li><a href="admin/admin-login.html" class="nav-link">⚙️ Admin</a></li>
+        </ul>
+        <div class="nav-actions">
+          <button class="theme-toggle" aria-label="Toggle theme">
+            <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          </button>
+          <button class="menu-toggle" aria-label="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <section class="volunteer-dashboard-hero">
+    <div class="container">
+      <div class="volunteer-welcome">
+        <span class="status-banner" id="statusBanner">⏳ Application Status: Pending Review</span>
+        <h1>Welcome back, <span id="userName">Volunteer</span>! 👋</h1>
+        <p>Here's your volunteer activity, impact, and opportunities.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="dashboard-section">
+    <div class="container">
+      <!-- Stats overview -->
+      <div class="stats-grid-admin" style="margin-bottom: 32px;">
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <div class="stat-card-icon">⏱️</div>
+            <span class="trend up">↑ Active</span>
+          </div>
+          <div class="value" id="hoursLogged">0</div>
+          <div class="label">Hours Logged</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <div class="stat-card-icon">🎪</div>
+            <span class="trend up">+3</span>
+          </div>
+          <div class="value" id="eventsAttended">0</div>
+          <div class="label">Events Attended</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <div class="stat-card-icon">❤️</div>
+            <span class="trend up">+12%</span>
+          </div>
+          <div class="value" id="livesImpacted">0</div>
+          <div class="label">Lives Impacted</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <div class="stat-card-icon">🏆</div>
+            <span class="trend up">Level 2</span>
+          </div>
+          <div class="value" id="badgesEarned">0</div>
+          <div class="label">Badges Earned</div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1.4fr; gap: 24px;">
+        <!-- Profile card -->
+        <div>
+          <div class="profile-card" style="margin-bottom: 24px;">
+            <div class="profile-avatar-large" id="profileAvatar">V</div>
+            <h3 style="text-align: center; margin-bottom: 4px;" id="profileName">Volunteer</h3>
+            <p style="text-align: center; color: var(--primary); font-weight: 600; margin-bottom: 24px;" id="profileRole">Volunteer</p>
+
+            <div class="info-row">
+              <span class="label">Status</span>
+              <span class="value"><span class="status-badge pending" id="profileStatus">Pending</span></span>
+            </div>
+            <div class="info-row">
+              <span class="label">City</span>
+              <span class="value" id="profileCity">—</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Availability</span>
+              <span class="value" id="profileAvailability">—</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Joined</span>
+              <span class="value" id="profileJoined">—</span>
+            </div>
+
+            <div style="margin-top: 24px;">
+              <button class="btn btn-secondary" style="width: 100%;">✏️ Edit Profile</button>
+              <button class="btn btn-ghost" style="width: 100%; margin-top: 8px; color: var(--primary);" onclick="window.NPAuth.signOut()">
+                🚪 Sign Out
+              </button>
+            </div>
+          </div>
+
+          <!-- Skills -->
+          <div class="profile-card">
+            <h4 style="margin-bottom: 16px;">🎯 Your Interests</h4>
+            <div id="interestsList">
+              <span class="skill-tag">Loading...</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right column -->
+        <div>
+          <!-- Upcoming events -->
+          <div class="data-panel" style="margin-bottom: 24px;">
+            <div class="panel-header">
+              <h3>🎪 Upcoming Opportunities</h3>
+              <a href="programs.html" class="btn btn-secondary btn-sm">Browse All</a>
+            </div>
+            <div class="panel-body">
+              <div class="activity-list" id="opportunitiesList">
+                <div class="activity-item">
+                  <div class="activity-icon">📚</div>
+                  <div class="activity-content">
+                    <strong>Weekend Education Drive — Kanpur</strong>
+                    <span>📅 Saturday, 10 AM • 📍 Kanpur Center</span>
+                  </div>
+                </div>
+                <div class="activity-item">
+                  <div class="activity-icon">🍱</div>
+                  <div class="activity-content">
+                    <strong>Food Distribution Camp</strong>
+                    <span>📅 Next Sunday, 8 AM • 📍 Ghaziabad</span>
+                  </div>
+                </div>
+                <div class="activity-item">
+                  <div class="activity-icon">🩷</div>
+                  <div class="activity-content">
+                    <strong>Sakhi Awareness Workshop</strong>
+                    <span>📅 15th, 2 PM • 📍 Lucknow</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent activity -->
+          <div class="data-panel">
+            <div class="panel-header">
+              <h3>📈 Recent Activity</h3>
+            </div>
+            <div class="panel-body">
+              <div class="activity-list">
+                <div class="activity-item">
+                  <div class="activity-icon">✅</div>
+                  <div class="activity-content">
+                    <strong>Profile approved by admin</strong>
+                    <span>2 days ago</span>
+                  </div>
+                </div>
+                <div class="activity-item">
+                  <div class="activity-icon">🎓</div>
+                  <div class="activity-content">
+                    <strong>Completed onboarding training</strong>
+                    <span>1 week ago</span>
+                  </div>
+                </div>
+                <div class="activity-item">
+                  <div class="activity-icon">🏅</div>
+                  <div class="activity-content">
+                    <strong>Earned "First Contribution" badge</strong>
+                    <span>2 weeks ago</span>
+                  </div>
+                </div>
+                <div class="activity-item">
+                  <div class="activity-icon">📝</div>
+                  <div class="activity-content">
+                    <strong>Application submitted</strong>
+                    <span id="applicationDate">Just now</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border: none; padding: 0; justify-content: center;">
+        <div>© 2026 NayePankh Foundation • Made with 💛 for change-makers</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/supabase-client.js"></script>
+  <script src="../js/auth.js"></script>
+  <script>
+    // Auth guard
+    if (!window.NPAuth.isLoggedIn()) {
+      window.location.href = 'volunteer-login.html';
+    }
+
+    async function loadDashboard() {
+      const user = window.NPAuth.getUser();
+      const displayName = window.NPAuth.getDisplayName();
+      const initials = displayName.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+
+      document.getElementById('userName').textContent = displayName;
+      document.getElementById('profileName').textContent = displayName;
+      document.getElementById('profileAvatar').textContent = initials;
+
+      // Load volunteer data (find by email)
+      try {
+        const allVols = await window.NPDB.getVolunteers();
+        const myProfile = allVols.find(v => v.email === user.email);
+
+        if (myProfile) {
+          document.getElementById('profileCity').textContent = myProfile.city || '—';
+          document.getElementById('profileAvailability').textContent = myProfile.availability || '—';
+          document.getElementById('profileJoined').textContent = new Date(myProfile.joined_date).toLocaleDateString();
+          document.getElementById('applicationDate').textContent = new Date(myProfile.joined_date).toLocaleDateString();
+          document.getElementById('profileRole').textContent =
+            myProfile.role.charAt(0).toUpperCase() + myProfile.role.slice(1);
+
+          // Status
+          const status = myProfile.status || 'pending';
+          const statusEl = document.getElementById('profileStatus');
+          statusEl.className = 'status-badge ' + status;
+          statusEl.textContent = status.charAt(0).toUpperCase() + status.slice(1);
+
+          const banner = document.getElementById('statusBanner');
+          if (status === 'pending') banner.textContent = '⏳ Application Pending Review';
+          else if (status === 'approved' || status === 'active') banner.textContent = '✅ Application Approved — Welcome to the team!';
+          else if (status === 'rejected') banner.textContent = '❌ Application Rejected';
+
+          // Stats
+          document.getElementById('hoursLogged').textContent = myProfile.hours_logged || 0;
+          document.getElementById('eventsAttended').textContent = myProfile.events_attended || 0;
+          document.getElementById('livesImpacted').textContent = (myProfile.hours_logged || 0) * 12;
+          document.getElementById('badgesEarned').textContent =
+            Math.floor((myProfile.hours_logged || 0) / 25) +
+            (myProfile.role === 'lead' ? 1 : 0) +
+            (myProfile.role === 'coordinator' ? 2 : 0);
+
+          // Interests
+          const interests = myProfile.interests || [];
+          const interestsList = document.getElementById('interestsList');
+          if (interests.length > 0) {
+            const labels = {
+              teaching: '📚 Teaching', food: '🍱 Food Drives', hygiene: '🩷 Women Hygiene',
+              tech: '💻 Tech', design: '🎨 Design', fundraising: '💰 Fundraising',
+              event: '🎪 Events', research: '🔍 Research', clothing: '👕 Clothing', skills: '🌱 Skills'
+            };
+            interestsList.innerHTML = interests.map(i =>
+              `<span class="skill-tag">${labels[i] || i}</span>`
+            ).join('');
+          } else {
+            interestsList.innerHTML = '<span class="skill-tag" style="background: var(--bg-soft); color: var(--text-soft);">No interests set yet</span>';
+          }
+        } else {
+          // User logged in but no volunteer record (e.g., signed up via OAuth)
+          document.getElementById('profileCity').textContent = 'Not set';
+          document.getElementById('profileAvailability').textContent = 'Not set';
+          document.getElementById('profileJoined').textContent = new Date().toLocaleDateString();
+          document.getElementById('hoursLogged').textContent = '0';
+          document.getElementById('eventsAttended').textContent = '0';
+          document.getElementById('livesImpacted').textContent = '0';
+          document.getElementById('badgesEarned').textContent = '0';
+          document.getElementById('interestsList').innerHTML =
+            '<a href="volunteer-register.html" class="btn btn-secondary btn-sm">Complete your profile →</a>';
+        }
+      } catch (err) {
+        console.error('Failed to load dashboard:', err);
+      }
+    }
+
+    loadDashboard();
+  </script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login | NayePankh Foundation</title>
+  <meta name="description" content="Secure admin portal for NayePankh Foundation." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/admin.css" />
+  <link rel="icon" type="image/png" href="../images/logo.svg.png" />
+  <style>
+    .auth-page { background: linear-gradient(135deg, #1a1f29 0%, #0f1419 100%); }
+    .auth-card { border: 1px solid rgba(255,255,255,0.05); }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="container">
+      <nav class="nav">
+        <a href="../index.html" class="nav-logo">
+          <img src="../images/logo.svg.png" alt="Logo" />
+          <span>NayePankh Admin</span>
+        </a>
+        <ul class="nav-menu">
+          <li><a href="../index.html" class="nav-link">← Back to site</a></li>
+          <li><a href="../pages/volunteer-login.html" class="nav-link">Volunteer Login</a></li>
+        </ul>
+        <div class="nav-actions">
+          <button class="theme-toggle"><svg class="moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><svg class="sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="auth-page">
+    <div class="auth-card" style="background: var(--bg-card);">
+      <div class="auth-header">
+        <div style="width: 64px; height: 64px; border-radius: 14px; background: var(--gradient-secondary); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; color: #fff; font-size: 1.8rem;">⚙️</div>
+        <h1>Admin <span class="gradient-text">Portal</span></h1>
+        <p>Secure access for NayePankh Foundation administrators</p>
+      </div>
+
+      <form id="loginForm">
+        <div class="form-group">
+          <label class="form-label">Admin Email</label>
+          <input type="email" class="form-input" name="email" required placeholder="admin@nayepankh.com" autofocus />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <div class="password-wrapper">
+            <input type="password" class="form-input" name="password" required placeholder="Admin password" id="passwordInput" />
+            <button type="button" class="password-toggle" onclick="togglePassword('passwordInput', this)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <label style="display: flex; align-items: center; gap: 8px; font-size: 0.88rem; cursor: pointer;">
+            <input type="checkbox" name="remember" style="accent-color: var(--primary);" />
+            Keep me signed in
+          </label>
+          <a href="#" id="forgotPassword" style="font-size: 0.88rem; color: var(--primary); font-weight: 600;">Reset password?</a>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; background: var(--gradient-secondary);" id="loginBtn">
+          🔐 Sign in to Dashboard
+        </button>
+      </form>
+
+      <div style="margin-top: 20px; padding: 14px; background: rgba(255, 107, 53, 0.08); border-radius: 10px; font-size: 0.85rem; color: var(--text-muted);">
+        <strong style="color: var(--primary);">🔧 Demo Admin Login:</strong><br />
+        Email: <code>admin@nayepankh.com</code><br />
+        Password: <code>admin123</code>
+      </div>
+
+      <div class="auth-footer" style="margin-top: 20px;">
+        <a href="../index.html">← Back to main site</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/supabase-client.js"></script>
+  <script src="../js/auth.js"></script>
+  <script>
+    function togglePassword(id, btn) {
+      const input = document.getElementById(id);
+      const isPwd = input.type === 'password';
+      input.type = isPwd ? 'text' : 'password';
+      btn.innerHTML = isPwd
+        ? '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24M1 1l22 22"/></svg>'
+        : '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
+    }
+
+    function showToast(message, type = 'info') {
+      let container = document.querySelector('.toast-container');
+      if (!container) {
+        container = document.createElement('div');
+        container.className = 'toast-container';
+        document.body.appendChild(container);
+      }
+      const t = document.createElement('div');
+      t.className = `toast-notif ${type}`;
+      const icons = { success: '✓', error: '✕', warning: '!', info: 'ℹ' };
+      t.innerHTML = `<div class="icon">${icons[type] || icons.info}</div><div>${message}</div>`;
+      container.appendChild(t);
+      setTimeout(() => {
+        t.style.opacity = '0';
+        t.style.transform = 'translateX(120%)';
+        setTimeout(() => t.remove(), 300);
+      }, 3500);
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(e.target));
+      const btn = document.getElementById('loginBtn');
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span> Authenticating...';
+
+      try {
+        await window.NPAuth.signIn(data);
+
+        // Verify admin role
+        if (!window.NPAuth.isAdmin) {
+          throw new Error('Access denied. Admin privileges required.');
+        }
+
+        showToast('🎉 Welcome, Admin! Loading dashboard...', 'success');
+        setTimeout(() => {
+          window.location.href = 'dashboard.html';
+        }, 1000);
+      } catch (err) {
+        showToast(err.message || 'Invalid credentials', 'error');
+        btn.disabled = false;
+        btn.innerHTML = '🔐 Sign in to Dashboard';
+      }
+    });
+
+    document.getElementById('forgotPassword').addEventListener('click', async (e) => {
+      e.preventDefault();
+      const email = prompt('Enter your admin email:');
+      if (!email) return;
+      try {
+        await window.NPAuth.resetPassword(email);
+        showToast('📧 Reset link sent!', 'success');
+      } catch (err) {
+        showToast(err.message || 'Could not send reset email', 'error');
+      }
+    });
+
+    if (window.NPAuth.isLoggedIn() && window.NPAuth.isAdmin) {
+      window.location.href = 'dashboard.html';
+    }
+  </script>
+</body>
+</html>

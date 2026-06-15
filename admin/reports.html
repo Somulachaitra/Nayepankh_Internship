@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reports & Analytics | NayePankh Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/admin.css" />
+  <link rel="icon" type="image/png" href="../images/logo.svg.png" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+  <div class="admin-layout">
+    <aside class="admin-sidebar" id="sidebar">
+      <div class="admin-brand">
+        <img src="../images/logo.svg.png" alt="Logo" />
+        <span>NayePankh<br/><small style="font-weight: 400; font-size: 0.78rem; color: var(--text-soft);">Admin Portal</small></span>
+      </div>
+      <ul class="admin-nav">
+        <li><a href="dashboard.html"><span class="icon">📊</span>Dashboard</a></li>
+        <li><a href="volunteers.html"><span class="icon">👥</span>Volunteers<span class="nav-badge" id="pendingBadge">0</span></a></li>
+        <li><a href="reports.html" class="active"><span class="icon">📈</span>Reports</a></li>
+      </ul>
+      <div class="admin-nav-section">
+        <div class="admin-nav-section-title">Account</div>
+        <ul class="admin-nav">
+          <li><a href="../index.html" target="_blank"><span class="icon">🌐</span>View Site</a></li>
+          <li><a href="#" onclick="event.preventDefault(); window.NPAuth.signOut();"><span class="icon">🚪</span>Sign Out</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-header">
+        <div>
+          <button class="admin-menu-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+          <h1>Reports & Analytics</h1>
+          <p>Generate insights and export volunteer data.</p>
+        </div>
+        <div class="admin-user">
+          <div class="avatar" id="adminAvatar">A</div>
+          <div class="admin-user-info"><strong id="adminName">Admin</strong><span>Administrator</span></div>
+          <button class="theme-toggle"><svg class="moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><svg class="sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button>
+        </div>
+      </div>
+
+      <!-- Date range filter -->
+      <div class="data-panel" style="margin-bottom: 24px;">
+        <div class="panel-body" style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+          <strong>📅 Report Period:</strong>
+          <select class="form-select" style="width: auto;" id="dateRange" onchange="applyDateRange()">
+            <option value="7">Last 7 days</option>
+            <option value="30" selected>Last 30 days</option>
+            <option value="90">Last 90 days</option>
+            <option value="365">Last year</option>
+            <option value="all">All time</option>
+          </select>
+          <div style="flex: 1;"></div>
+          <button class="btn btn-secondary btn-sm" onclick="exportFullReport()">📄 Export PDF Report</button>
+          <button class="btn btn-secondary btn-sm" onclick="exportCSV(window.allVols || [])">📊 Export CSV</button>
+        </div>
+      </div>
+
+      <!-- Quick reports -->
+      <div class="report-cards">
+        <div class="report-card" onclick="showReport('overview')">
+          <div class="icon">📊</div>
+          <h4>Volunteer Overview</h4>
+          <p>Total count, growth trends, status distribution, and key metrics.</p>
+          <div class="meta">Updated: Just now</div>
+        </div>
+        <div class="report-card" onclick="showReport('skills')">
+          <div class="icon">🛠️</div>
+          <h4>Skills Gap Analysis</h4>
+          <p>Identify which skills are abundant vs. needed across programs.</p>
+          <div class="meta">Updated: Just now</div>
+        </div>
+        <div class="report-card" onclick="showReport('geographic')">
+          <div class="icon">📍</div>
+          <h4>Geographic Distribution</h4>
+          <p>Where your volunteers are located and where to focus outreach.</p>
+          <div class="meta">Updated: Just now</div>
+        </div>
+        <div class="report-card" onclick="showReport('engagement')">
+          <div class="icon">⏱️</div>
+          <h4>Engagement Report</h4>
+          <p>Hours logged, events attended, top contributors.</p>
+          <div class="meta">Updated: Just now</div>
+        </div>
+        <div class="report-card" onclick="showReport('approval')">
+          <div class="icon">✅</div>
+          <h4>Approval Funnel</h4>
+          <p>Application → approval → active volunteer conversion rates.</p>
+          <div class="meta">Updated: Just now</div>
+        </div>
+        <div class="report-card" onclick="showReport('demographics')">
+          <div class="icon">👥</div>
+          <h4>Demographics</h4>
+          <p>Age groups, cities, availability patterns of volunteers.</p>
+          <div class="meta">Updated: Just now</div>
+        </div>
+      </div>
+
+      <!-- Main charts area -->
+      <div id="reportContent">
+        <div class="charts-grid" style="grid-template-columns: 2fr 1fr;">
+          <div class="chart-container" style="height: 400px;">
+            <h4>📈 Volunteer Growth Trend</h4>
+            <canvas id="growthChart"></canvas>
+          </div>
+          <div class="chart-container" style="height: 400px;">
+            <h4>🎯 Approval Pipeline</h4>
+            <canvas id="funnelChart"></canvas>
+          </div>
+        </div>
+
+        <div class="charts-grid" style="grid-template-columns: 1fr 1fr;">
+          <div class="chart-container" style="height: 360px;">
+            <h4>⏱️ Hours by City (Top 10)</h4>
+            <canvas id="hoursChart"></canvas>
+          </div>
+          <div class="chart-container" style="height: 360px;">
+            <h4>📊 Age Group Distribution</h4>
+            <canvas id="ageChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Engagement table -->
+        <div class="data-panel">
+          <div class="panel-header">
+            <h3>🏆 Top Contributors (by hours)</h3>
+          </div>
+          <div style="overflow-x: auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>Volunteer</th>
+                  <th>Role</th>
+                  <th>City</th>
+                  <th>Hours</th>
+                  <th>Events</th>
+                  <th>Impact Score</th>
+                </tr>
+              </thead>
+              <tbody id="topTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/supabase-client.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="admin.js"></script>
+  <script>
+    if (!window.NPAuth.isLoggedIn() || !window.NPAuth.isAdmin) {
+      window.location.href = 'admin-login.html';
+    }
+
+    const adminName = window.NPAuth.getDisplayName();
+    document.getElementById('adminName').textContent = adminName;
+    document.getElementById('adminAvatar').textContent = adminName[0].toUpperCase();
+
+    let allVolunteers = [];
+
+    async function loadReports() {
+      try {
+        allVolunteers = await window.NPDB.getVolunteers();
+        window.allVols = allVolunteers;
+        const pending = allVolunteers.filter(v => v.status === 'pending').length;
+        document.getElementById('pendingBadge').textContent = pending;
+
+        applyDateRange();
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    function applyDateRange() {
+      const days = document.getElementById('dateRange').value;
+      const cutoff = days === 'all' ? 0 : Date.now() - (parseInt(days) * 24 * 60 * 60 * 1000);
+
+      const filtered = allVolunteers.filter(v => {
+        if (cutoff === 0) return true;
+        return new Date(v.joined_date).getTime() >= cutoff;
+      });
+
+      renderGrowthChart(filtered);
+      renderFunnelChart(filtered);
+      renderHoursChart(filtered);
+      renderAgeChart(filtered);
+      renderTopContributors(allVolunteers);
+    }
+
+    function renderGrowthChart(volunteers) {
+      const ctx = document.getElementById('growthChart');
+      if (window._growthChart) window._growthChart.destroy();
+
+      const byMonth = {};
+      volunteers.forEach(v => {
+        const m = new Date(v.joined_date).toISOString().slice(0, 7);
+        byMonth[m] = (byMonth[m] || 0) + 1;
+      });
+
+      const labels = [];
+      const data = [];
+      const sortedKeys = Object.keys(byMonth).sort();
+      sortedKeys.forEach(k => {
+        const d = new Date(k + '-01');
+        labels.push(d.toLocaleDateString('en-US', { month: 'short', year: '2-digit' }));
+        data.push(byMonth[k]);
+      });
+
+      // Cumulative line
+      const cumulative = data.reduce((acc, n, i) => [...acc, (acc[i-1] || 0) + n], []);
+
+      window._growthChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [
+            {
+              label: 'New Volunteers',
+              data,
+              borderColor: '#ff6b35',
+              backgroundColor: 'rgba(255, 107, 53, 0.2)',
+              tension: 0.4,
+              fill: true,
+              yAxisID: 'y'
+            },
+            {
+              label: 'Cumulative Total',
+              data: cumulative,
+              borderColor: '#1b4332',
+              backgroundColor: 'transparent',
+              tension: 0.4,
+              borderDash: [5, 5],
+              yAxisID: 'y1'
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          scales: {
+            y: { type: 'linear', position: 'left', beginAtZero: true, title: { display: true, text: 'New' } },
+            y1: { type: 'linear', position: 'right', beginAtZero: true, title: { display: true, text: 'Total' }, grid: { drawOnChartArea: false } }
+          }
+        }
+      });
+    }
+
+    function renderFunnelChart(volunteers) {
+      const ctx = document.getElementById('funnelChart');
+      if (window._funnelChart) window._funnelChart.destroy();
+
+      const total = volunteers.length;
+      const approved = volunteers.filter(v => v.status === 'approved' || v.status === 'active').length;
+      const active = volunteers.filter(v => v.status === 'active').length;
+      const engaged = volunteers.filter(v => (v.hours_logged || 0) > 0).length;
+
+      window._funnelChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Applied', 'Approved', 'Active', 'Engaged'],
+          datasets: [{
+            data: [total, approved, active, engaged],
+            backgroundColor: ['#94a3b8', '#fbbf24', '#22c55e', '#ff6b35'],
+            borderRadius: 8
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: (ctx) => {
+                  const v = ctx.raw;
+                  const pct = total ? ((v / total) * 100).toFixed(1) : 0;
+                  return `${v} volunteers (${pct}%)`;
+                }
+              }
+            }
+          },
+          scales: { x: { beginAtZero: true } }
+        }
+      });
+    }
+
+    function renderHoursChart(volunteers) {
+      const ctx = document.getElementById('hoursChart');
+      if (window._hoursChart) window._hoursChart.destroy();
+
+      const byCity = {};
+      volunteers.forEach(v => {
+        const c = v.city || 'Unknown';
+        byCity[c] = (byCity[c] || 0) + (v.hours_logged || 0);
+      });
+      const sorted = Object.entries(byCity).sort((a, b) => b[1] - a[1]).slice(0, 10);
+
+      window._hoursChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: sorted.map(s => s[0]),
+          datasets: [{
+            label: 'Hours',
+            data: sorted.map(s => s[1]),
+            backgroundColor: 'rgba(27, 67, 50, 0.8)',
+            borderRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: { y: { beginAtZero: true } }
+        }
+      });
+    }
+
+    function renderAgeChart(volunteers) {
+      const ctx = document.getElementById('ageChart');
+      if (window._ageChart) window._ageChart.destroy();
+
+      const byAge = {};
+      volunteers.forEach(v => {
+        const a = v.age_group || 'Unknown';
+        byAge[a] = (byAge[a] || 0) + 1;
+      });
+
+      window._ageChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: Object.keys(byAge),
+          datasets: [{
+            data: Object.values(byAge),
+            backgroundColor: ['#ff6b35', '#f77f00', '#fcbf49', '#1b4332', '#2d6a4f', '#667eea'],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { position: 'right', labels: { padding: 12 } } }
+        }
+      });
+    }
+
+    function renderTopContributors(volunteers) {
+      const top = [...volunteers]
+        .filter(v => (v.hours_logged || 0) > 0)
+        .sort((a, b) => (b.hours_logged || 0) - (a.hours_logged || 0))
+        .slice(0, 10);
+
+      const tbody = document.getElementById('topTable');
+      if (top.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7"><div class="empty-state"><div class="icon">🏆</div><h4>No contributors yet</h4><p>Volunteer activity will appear here</p></div></td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = top.map((v, i) => {
+        const rank = i + 1;
+        const medal = rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : `#${rank}`;
+        const impactScore = (v.hours_logged || 0) * 12 + (v.events_attended || 0) * 5;
+        return `
+          <tr>
+            <td><strong>${medal}</strong></td>
+            <td>
+              <div class="user-cell">
+                <div class="user-avatar">${getInitials(v.full_name)}</div>
+                <div>
+                  <div class="user-name">${v.full_name}</div>
+                  <div class="user-email">${v.email}</div>
+                </div>
+              </div>
+            </td>
+            <td><span class="role-badge ${v.role}">${v.role}</span></td>
+            <td>${v.city || '—'}</td>
+            <td><strong>${v.hours_logged || 0}</strong> hrs</td>
+            <td>${v.events_attended || 0}</td>
+            <td><strong style="color: var(--primary);">${impactScore.toLocaleString()}</strong></td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function exportFullReport() {
+      showToast('📄 Generating PDF report...', 'info');
+
+      // Use jsPDF (loaded from CDN) for a simple text-based report
+      try {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        doc.setFontSize(20);
+        doc.setFont(undefined, 'bold');
+        doc.text('NayePankh Foundation', 20, 20);
+        doc.setFontSize(14);
+        doc.text('Volunteer Management Report', 20, 30);
+
+        doc.setFontSize(10);
+        doc.setFont(undefined, 'normal');
+        doc.text(`Generated: ${new Date().toLocaleString()}`, 20, 38);
+        doc.text(`Period: ${document.getElementById('dateRange').selectedOptions[0].text}`, 20, 44);
+
+        // Stats
+        const stats = {
+          total: allVolunteers.length,
+          pending: allVolunteers.filter(v => v.status === 'pending').length,
+          approved: allVolunteers.filter(v => v.status === 'approved').length,
+          active: allVolunteers.filter(v => v.status === 'active').length,
+          totalHours: allVolunteers.reduce((s, v) => s + (v.hours_logged || 0), 0),
+          totalEvents: allVolunteers.reduce((s, v) => s + (v.events_attended || 0), 0)
+        };
+
+        doc.setFontSize(13);
+        doc.setFont(undefined, 'bold');
+        doc.text('Summary Statistics', 20, 58);
+        doc.setFontSize(10);
+        doc.setFont(undefined, 'normal');
+        doc.text(`Total Volunteers: ${stats.total}`, 20, 66);
+        doc.text(`Pending Review: ${stats.pending}`, 20, 72);
+        doc.text(`Approved: ${stats.approved}`, 20, 78);
+        doc.text(`Active: ${stats.active}`, 20, 84);
+        doc.text(`Total Hours Logged: ${stats.totalHours}`, 20, 90);
+        doc.text(`Total Events Attended: ${stats.totalEvents}`, 20, 96);
+
+        // Top contributors
+        doc.setFontSize(13);
+        doc.setFont(undefined, 'bold');
+        doc.text('Top Contributors', 20, 110);
+
+        doc.setFontSize(9);
+        doc.setFont(undefined, 'normal');
+        const top = [...allVolunteers]
+          .filter(v => (v.hours_logged || 0) > 0)
+          .sort((a, b) => (b.hours_logged || 0) - (a.hours_logged || 0))
+          .slice(0, 10);
+
+        let y = 118;
+        doc.text('Name', 20, y);
+        doc.text('City', 80, y);
+        doc.text('Role', 120, y);
+        doc.text('Hours', 160, y);
+        doc.text('Events', 185, y);
+
+        y += 6;
+        top.forEach(v => {
+          if (y > 280) { doc.addPage(); y = 20; }
+          doc.text(v.full_name.substring(0, 25), 20, y);
+          doc.text((v.city || '—').substring(0, 15), 80, y);
+          doc.text(v.role, 120, y);
+          doc.text(String(v.hours_logged || 0), 160, y);
+          doc.text(String(v.events_attended || 0), 185, y);
+          y += 6;
+        });
+
+        doc.save(`nayepankh-report-${new Date().toISOString().slice(0,10)}.pdf`);
+        showToast('✓ PDF report downloaded', 'success');
+      } catch (err) {
+        console.error(err);
+        showToast('PDF generation requires jsPDF. Downloading CSV instead.', 'warning');
+        exportCSV(allVolunteers);
+      }
+    }
+
+    function showReport(type) {
+      // For simplicity, scroll to charts and highlight
+      document.getElementById('reportContent').scrollIntoView({ behavior: 'smooth' });
+      showToast(`📊 Showing ${type} report`, 'info');
+    }
+
+    loadReports();
+  </script>
+</body>
+</html>

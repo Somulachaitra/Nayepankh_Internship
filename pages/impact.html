@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Impact | NayePankh Foundation - Lives Transformed</title>
+  <meta name="description" content="See the real impact of NayePankh Foundation — 2 lakh+ lives touched, 50K+ meals served, 15K+ students educated. AI-powered transparency dashboards." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="icon" type="image/png" href="../images/logo.svg.png" />
+</head>
+<body>
+
+  <header class="header">
+    <div class="container">
+      <nav class="nav">
+        <a href="../index.html" class="nav-logo"><img src="../images/logo.svg.png" alt="Logo" /><span>NayePankh</span></a>
+        <ul class="nav-menu">
+          <li><a href="../index.html" class="nav-link">Home</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="programs.html" class="nav-link">Programs</a></li>
+          <li><a href="impact.html" class="nav-link">Impact</a></li>
+          <li><a href="volunteer-register.html" class="nav-link">Volunteer</a></li>
+          <li><a href="ai-assistant.html" class="nav-link">🤖 AI Assistant</a></li>
+          <li><a href="../admin/admin-login.html" class="nav-link">⚙️ Admin</a></li>
+          <li><a href="donate.html" class="btn btn-primary" style="padding: 10px 22px;">Donate</a></li>
+        </ul>
+        <div class="nav-actions">
+          <button class="theme-toggle"><svg class="moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><svg class="sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button>
+          <button class="menu-toggle"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb"><a href="../index.html">Home</a><span>/</span><span>Impact</span></div>
+      <h1>Real Impact, <span class="gradient-text">Real Lives</span></h1>
+      <p>Six years of transforming communities. Every number represents a life touched, a smile restored, a future brightened.</p>
+    </div>
+  </section>
+
+  <!-- BIG STATS BAND -->
+  <section class="stats-band">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item reveal">
+          <div class="stat-num"><span data-count="200000" data-suffix="+">0</span></div>
+          <div class="stat-lbl">Lives Touched</div>
+        </div>
+        <div class="stat-item reveal reveal-delay-1">
+          <div class="stat-num"><span data-count="15000" data-suffix="+">0</span></div>
+          <div class="stat-lbl">Students Educated</div>
+        </div>
+        <div class="stat-item reveal reveal-delay-2">
+          <div class="stat-num"><span data-count="50000" data-suffix="+">0</span></div>
+          <div class="stat-lbl">Meals Served</div>
+        </div>
+        <div class="stat-item reveal reveal-delay-3">
+          <div class="stat-num"><span data-count="8000" data-suffix="+">0</span></div>
+          <div class="stat-lbl">Women Supported</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI IMPACT CALCULATOR -->
+  <section class="section" id="impact-calculator-section">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-tag">🤖 Personalized For You</span>
+        <h2 class="section-title">Calculate Your <span class="gradient-text">Impact</span></h2>
+        <p class="section-desc">Our AI instantly calculates exactly how your contribution transforms lives.</p>
+      </div>
+
+      <div class="impact-card reveal" style="max-width: 800px; margin: 0 auto;">
+        <form id="impact-form" class="impact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Donation Amount (₹)</label>
+              <input type="number" class="form-input" name="amount" value="5000" min="100" step="100" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Frequency</label>
+              <select class="form-select" name="frequency">
+                <option value="one-time">One-time</option>
+                <option value="monthly" selected>Monthly</option>
+                <option value="yearly">Yearly</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Cause</label>
+            <select class="form-select" name="cause">
+              <option value="education">📚 Education</option>
+              <option value="food">🍱 Food & Nutrition</option>
+              <option value="hygiene">🩷 Women Hygiene</option>
+              <option value="clothing">👕 Clothing</option>
+              <option value="general" selected>💛 Where Most Needed</option>
+            </select>
+          </div>
+        </form>
+        <div id="impact-result" class="impact-result"></div>
+        <div class="text-center mt-3">
+          <a href="donate.html" class="btn btn-primary">Make This Real — Donate Now ✨</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI RECOMMENDATIONS -->
+  <section class="section" style="background: var(--bg-soft);">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-tag">🎯 AI-Powered Suggestions</span>
+        <h2 class="section-title">Recommended for <span class="gradient-text">You</span></h2>
+        <p class="section-desc">Based on your interests and our most impactful programs.</p>
+      </div>
+      <div id="recommendations" class="programs-grid"></div>
+    </div>
+  </section>
+
+  <!-- IMPACT STORIES (Testimonials marquee) -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-tag">Stories of Change</span>
+        <h2 class="section-title">Voices from the <span class="gradient-text">community</span></h2>
+      </div>
+
+      <div class="marquee" style="margin-bottom: 32px;">
+        <div class="marquee-track">
+          <div class="program-card" style="min-width: 320px; margin-right: 20px;">
+            <div class="program-icon">🌟</div>
+            <p>"NayePankh's education program changed my daughter's life. From struggling in school to topping her class — she now dreams of becoming a doctor."</p>
+            <strong style="display: block; margin-top: 12px; color: var(--text);">— Sunita Devi, Mother (Kanpur)</strong>
+          </div>
+          <div class="program-card" style="min-width: 320px; margin-right: 20px;">
+            <div class="program-icon">💪</div>
+            <p>"The Sakhi program gave me confidence to talk about periods openly. Today I help other girls in my village."</p>
+            <strong style="display: block; margin-top: 12px; color: var(--text);">— Priya, Age 16 (Ghaziabad)</strong>
+          </div>
+          <div class="program-card" style="min-width: 320px; margin-right: 20px;">
+            <div class="program-icon">🍱</div>
+            <p>"When lockdown hit, NayePankh's food drives kept my family fed for 3 months. We are forever grateful."</p>
+            <strong style="display: block; margin-top: 12px; color: var(--text);">— Ravi Kumar, Father (Lucknow)</strong>
+          </div>
+          <div class="program-card" style="min-width: 320px; margin-right: 20px;">
+            <div class="program-icon">🌱</div>
+            <p>"The tailoring training helped me start my own business. I now earn ₹15,000/month and employ 2 others."</p>
+            <strong style="display: block; margin-top: 12px; color: var(--text);">— Meena, Trainee (Delhi)</strong>
+          </div>
+          <div class="program-card" style="min-width: 320px; margin-right: 20px;">
+            <div class="program-icon">📚</div>
+            <p>"Volunteering with NayePankh during college shaped who I am today. It's the most meaningful work I've done."</p>
+            <strong style="display: block; margin-top: 12px; color: var(--text);">— Ankit Sharma, Alumni Volunteer</strong>
+          </div>
+          <div class="program-card" style="min-width: 320px; margin-right: 20px;">
+            <div class="program-icon">🩷</div>
+            <p>"Our community used to be silent about hygiene. Today, every adolescent girl knows about menstrual health."</p>
+            <strong style="display: block; margin-top: 12px; color: var(--text);">— Asha Worker, UP</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRANSPARENCY -->
+  <section class="section" style="background: var(--bg-soft);">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-tag">Transparency</span>
+        <h2 class="section-title">Where your <span class="gradient-text">money</span> goes</h2>
+        <p class="section-desc">AI-tracked, publicly reported financials.</p>
+      </div>
+
+      <div class="programs-grid" style="max-width: 1000px; margin: 0 auto;">
+        <div class="program-card reveal">
+          <div class="program-icon">🍱</div>
+          <h3>Programs (78%)</h3>
+          <p>The vast majority of every donation directly funds our programs — meals, education, hygiene, and training.</p>
+        </div>
+        <div class="program-card reveal reveal-delay-1">
+          <div class="program-icon">👥</div>
+          <h3>Operations (14%)</h3>
+          <p>Essential support staff, technology, and logistics that keep programs running smoothly.</p>
+        </div>
+        <div class="program-card reveal reveal-delay-2">
+          <div class="program-icon">📢</div>
+          <h3>Awareness (8%)</h3>
+          <p>Outreach, fundraising events, and communication to grow our community of changemakers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="background: var(--gradient-secondary); color: #fff; text-align: center;">
+    <div class="container">
+      <h2 style="color: #fff; margin-bottom: 16px;">Be a part of our next impact story</h2>
+      <p style="color: rgba(255,255,255,0.85); font-size: 1.05rem; margin-bottom: 32px;">
+        Your contribution today creates ripples of change tomorrow.
+      </p>
+      <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+        <a href="donate.html" class="btn btn-primary">Donate Now</a>
+        <a href="volunteer.html" class="btn btn-outline-light">Volunteer</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="../images/logo.svg.png" alt="Logo" />
+          <h4>NayePankh Foundation</h4>
+          <p>UP Government, 80G & 12A Registered NGO. Uplifting underprivileged communities with love and AI.</p>
+          <div class="social-links">
+            <a href="http://www.instagram.com/nayepankhfoundation" class="social-link"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+            <a href="https://www.linkedin.com/company/nayepankh" class="social-link"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+            <a href="http://www.facebook.com/nayepankhfoundation" class="social-link"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            <a href="https://www.youtube.com/@nayepankhfoundation" class="social-link"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg></a>
+          </div>
+        </div>
+        <div class="footer-col"><h5>Quick Links</h5><ul><li><a href="../index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="programs.html">Programs</a></li><li><a href="impact.html">Impact</a></li><li><a href="ai-assistant.html">AI Assistant</a></li></ul></div>
+        <div class="footer-col"><h5>Get Involved</h5><ul><li><a href="donate.html">Donate</a></li><li><a href="volunteer.html">Volunteer</a></li><li><a href="about.html">Our Team</a></li><li><a href="contact.html">Contact Us</a></li></ul></div>
+        <div class="footer-col"><h5>Contact</h5><ul><li>📧 contact@nayepankh.com</li><li>📱 +91- 8318500748</li><li>📍 Kanpur, UP, India</li></ul></div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 NayePankh Foundation. All rights reserved. | 80G Tax Exempted</div>
+        <div><a href="contact.html" style="color: rgba(255,255,255,0.6);">Privacy</a> · <a href="contact.html" style="color: rgba(255,255,255,0.6);">Terms</a> · <a href="contact.html" style="color: rgba(255,255,255,0.6);">Refund</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="ai-chat-widget">
+    <div class="chat-window">
+      <div class="chat-header"><div class="chat-header-info"><div class="chat-avatar">🤖</div><div><h4>Pankh AI</h4><div class="status">Online • Instant help</div></div></div><button class="chat-close">×</button></div>
+      <div class="chat-body"></div>
+      <div class="chat-suggestions"></div>
+      <div class="chat-input-area">
+        <input type="text" class="chat-input" placeholder="Ask me anything..." />
+        <button class="chat-send"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+      </div>
+    </div>
+    <button class="chat-toggle">💬<span class="pulse-dot"></span></button>
+  </div>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/ai-chat.js"></script>
+  <script src="../js/impact-calculator.js"></script>
+</body>
+</html>
