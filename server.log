@@ -1,0 +1,13 @@
+
+> nayepankh-ai@1.0.0 start
+> node server.js
+
+
+  ╔═════════════════════════════════════════════════╗
+  ║   🌟 NayePankh AI Server                    ║
+  ║   Running at http://127.0.0.1:3000           ║
+  ║                                              ║
+  ║   Gemini AI:  ✅ Configured              ║
+  ║   Static:     ✅ Serving from ./             ║
+  ╚═════════════════════════════════════════════════╝
+  
