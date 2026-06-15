@@ -21,7 +21,7 @@ app.use(cors());
 app.use(express.json());
 
 // ---------- Serve HTML pages from /pages directory without prefix or .html extension ----------
-const pagesDir = path.join(__dirname, 'pages');
+const pagesDir = path.join(__dirname, 'public', 'pages');
 fs.readdirSync(pagesDir).forEach(file => {
   if (file.endsWith('.html')) {
     const routeName = path.parse(file).name; // filename without extension
@@ -38,7 +38,7 @@ fs.readdirSync(pagesDir).forEach(file => {
 
 // ---------- Serve static files ----------
 // Serve the entire project directory as static files
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // ---------- Gemini AI Chat Route ----------
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
