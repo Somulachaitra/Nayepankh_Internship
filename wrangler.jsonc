@@ -10,7 +10,7 @@
     "binding": "ASSETS"
   },
   "vars": {
-    "GEMINI_API_KEY": "AQ.Ab8RN6Kl9iyW4KlpRPQZZ6XSemRLy87mfjiOUzs7N9gwdwdNiA"
+    "GEMINI_API_KEY": ""
   },
   "compatibility_flags": [
     "nodejs_compat"
